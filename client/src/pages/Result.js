@@ -10,7 +10,6 @@ const Result = () => {
   const [expandedCollege, setExpandedCollege] = useState(null);
 
   const handleTileClick = (collegeName) => {
-    // Toggle the expansion state for the clicked college
     setExpandedCollege((prevCollege) =>
       prevCollege === collegeName ? null : collegeName
     );
@@ -19,21 +18,26 @@ const Result = () => {
   return (
     <div className="result-frame">
       <div className="Result-body">
-        <h1 className="result-heading">Results for {state.sports}</h1>
-        <div className="sports-heading">
-          <h2>{state.sports}</h2>
-        </div>
+        <h1 className="result-heading">Results</h1>
+
+        {collegeDetailsArray.length > 0 && (
+          <div className="sports-heading">
+            <h2>{collegeDetailsArray[0].sportsConfirm}</h2>
+          </div>
+        )}
+
         <div className="college-tiles">
-          {collegeDetailsArray.map((college) => (
+          {collegeDetailsArray.map((college, index) => (
             <div
-              key={college.collegeName}
+              key={index}
               className={`college-tile ${
                 expandedCollege === college.collegeName ? "expanded" : ""
               }`}
               onClick={() => handleTileClick(college.collegeName)}
             >
               <h2>{college.collegeName}</h2>
-              {/* Additional details can be displayed when expanded */}
+
+              {/* Expanded Details */}
               {expandedCollege === college.collegeName && (
                 <div className="expanded-details">
                   <p>
@@ -49,17 +53,72 @@ const Result = () => {
                     <strong>Accommodation:</strong> {college.accommodation}
                   </p>
                   <p>
-                    <strong>Team Captain:</strong> {college.captainDetails}
+                    <strong>Food Provided:</strong> {college.food}
+                  </p>
+
+                  <h3>Captain Details</h3>
+                  <p>
+                    <strong>Name:</strong> {college.captainName}
                   </p>
                   <p>
-                    <strong>Captain Email:</strong> {college.captainMail}
+                    <strong>Email:</strong> {college.captainMail}
                   </p>
                   <p>
-                    <strong>Captain Number:</strong> {college.captainno}
+                    <strong>Phone:</strong> {college.captainPhone}
+                  </p>
+
+                  <h3>Vice Captain Details</h3>
+                  <p>
+                    <strong>Name:</strong> {college.viceCaptainName}
                   </p>
                   <p>
-                    <strong>Incharge Details:</strong> {college.inchargeDetails}
+                    <strong>Phone:</strong> {college.viceCaptainNumber}
                   </p>
+
+                  <h3>Sports Director Details</h3>
+                  <p>
+                    <strong>Name:</strong> {college.sportsDirectorName}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {college.sportsDirectorEmail}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {college.sportsDirectorNumber}
+                  </p>
+
+                  <h3>Other Details</h3>
+                  <p>
+                    <strong>Sports Head:</strong> {college.sportsHead}
+                  </p>
+                  <p>
+                    <strong>Transaction ID:</strong> {college.transactionId}
+                  </p>
+
+                  <h3>Players</h3>
+                  <ul>
+                    {[...Array(16).keys()].map((i) => {
+                      const playerName = college[`playerName${i + 1}`];
+                      const playerEmail = college[`playerEmail${i + 1}`];
+                      const playerPhone = college[`playerPhone${i + 1}`];
+
+                      return playerName ? (
+                        <li key={i}>
+                          <p>
+                            <strong>Player {i + 1}:</strong>
+                          </p>
+                          <p>
+                            <strong>Name:</strong> {playerName}
+                          </p>
+                          <p>
+                            <strong>Email:</strong> {playerEmail}
+                          </p>
+                          <p>
+                            <strong>Phone:</strong> {playerPhone}
+                          </p>
+                        </li>
+                      ) : null;
+                    })}
+                  </ul>
                 </div>
               )}
             </div>

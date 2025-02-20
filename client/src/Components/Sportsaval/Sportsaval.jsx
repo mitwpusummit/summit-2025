@@ -18,11 +18,9 @@ const SportsCard = ({ title, onSelectSport }) => {
 };
 
 const Sportsaval = () => {
-  const [selectedSport, setSelectedSport] = useState(null);
-  const [selectedSportDetails, setSelectedSportDetails] = useState(null);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const handleSelectSport = async (sport) => {
     try {
@@ -41,9 +39,8 @@ const Sportsaval = () => {
 
       const data = response.data;
       console.log("Sport details:", data);
-      console.log("Sport selected:", sport);
 
-      // Navigate to the result page with the selected sport details as state
+      // Navigate to result page with data
       navigate("/admin/result", { state: { selectedSportDetails: data } });
     } catch (error) {
       console.error("Axios error:", error);
@@ -58,36 +55,30 @@ const Sportsaval = () => {
       <Navbar />
       <div className="sports-landing-container">
         <h2>Select a Sport</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <div className="sports-list">
-          <SportsCard onSelectSport={handleSelectSport} title="Cricket(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Football(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Football(W)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Basketball(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Basketball(W)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Volleyball(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Volleyball(W)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Kabaddi" />
-          <SportsCard onSelectSport={handleSelectSport} title="Badminton(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Badminton(W)" />
-          <SportsCard
-            onSelectSport={handleSelectSport}
-            title="Table Tennis(M)"
-          />
-          <SportsCard
-            onSelectSport={handleSelectSport}
-            title="Table Tennis(W)"
-          />
-          <SportsCard onSelectSport={handleSelectSport} title="Chess(M)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Chess(W)" />
-          <SportsCard onSelectSport={handleSelectSport} title="Esports_BGMI" />
-          <SportsCard
-            onSelectSport={handleSelectSport}
-            title="Esports_Valorant"
-          />
-          <SportsCard
-            onSelectSport={handleSelectSport}
-            title="Esports_FIFA"
-          />
+          {[
+            "Cricket(M)",
+            "Football(M)",
+            "Football(W)",
+            "Basketball(M)",
+            "Basketball(W)",
+            "Volleyball(M)",
+            "Volleyball(W)",
+            "Kabaddi",
+            "Badminton(M)",
+            "Badminton(W)",
+            "Table Tennis(M)",
+            "Table Tennis(W)",
+            "Chess(M)",
+            "Chess(W)",
+            "Esports_BGMI",
+            "Esports_Valorant",
+            "Esports_FIFA",
+          ].map((sport) => (
+            <SportsCard key={sport} title={sport} onSelectSport={handleSelectSport} />
+          ))}
         </div>
       </div>
     </div>

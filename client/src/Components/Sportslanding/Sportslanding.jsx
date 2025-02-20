@@ -22,11 +22,11 @@ const Sportslanding = () => {
         <h2>SELECT A SPORT</h2>
         <h2>Please call the registration team before registering to avoid problems!</h2>
         <div className="sports-list">
-          <SportsCard
+          {/* <SportsCard
             title="Cricket (M)"
             subtitle="Rs. 21,000/-"
             link="/register/Cricket(M)"
-          />
+          /> */}
          {/* <SportsCard
             title="Football Men"
             subtitle="Rs. 7,200/-"
@@ -57,11 +57,11 @@ const Sportslanding = () => {
             subtitle="Rs. 1,800/-"
             link="/register/Volleyball(W)"
           />
-          <SportsCard
+          {/* <SportsCard
             title="Kabaddi"
             subtitle="Rs. 1,500/-"
             link="/register/Kabaddi"
-          />
+          /> */}
           <SportsCard
             title="Badminton Men"
             subtitle="Rs. 1,800/-"
